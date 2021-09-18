@@ -20,6 +20,7 @@ def products(request):
         Отправил в json файл products/fixtu/products.json
 
         content = {
+            'title': "GeekShop",
             'currency': 'руб',
             'products': [
                 {'name': 'Худи черного цвета с монограммами adidas Originals',
