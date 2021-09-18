@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.shortcuts import render
@@ -52,5 +53,8 @@ def products(request):
     """
     with open("products/fixtu/products.json", mode="r", encoding="utf-8") as json_file:
         content = json.load(json_file)
+
+    # Добавим текущую дату в контент.
+    content["date"] = datetime.datetime.now()
 
     return render(request, 'products/products.html', content)
