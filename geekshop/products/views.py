@@ -1,15 +1,13 @@
 import json
-from datetime import datetime
 
 from django.shortcuts import render
 
 
 # Create your views here.
-from geekshop.settings import BASE_DIR
-
 
 def index(request):
     content = {
+        'title': 'GeekShop',
         'header': 'GeekShop Store',
         'description': f"Новые образы и лучшие бренды на GeekShop Store.\n"
                        f"Бесплатная доставка по всему миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.",
@@ -55,4 +53,3 @@ def products(request):
         content = json.load(json_file)
 
     return render(request, 'products/products.html', content)
-
