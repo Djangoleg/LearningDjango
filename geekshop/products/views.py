@@ -19,10 +19,9 @@ def index(request):
 
 def products(request):
 
-    my_products = Product.objects.all()[:4]
+    my_products = Product.objects.all()
     content = {"title": "GeekShop",
                "currency": "руб",
-               "date": datetime.datetime.now(),
                "products": my_products}
 
     return render(request, 'products/products.html', content)
