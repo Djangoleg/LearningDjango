@@ -18,7 +18,7 @@ def index(request):
 
 def products(request):
     """
-        Отправил в json файл products/fixtu/products.json
+        Отправил в json файл products/fixtures/products.json
 
         content = {
             'title': "GeekShop",
@@ -51,10 +51,7 @@ def products(request):
             ]
         }
     """
-    with open("products/fixtu/products.json", mode="r", encoding="utf-8") as json_file:
+    with open("products/fixtures/products.json", mode="r", encoding="utf-8") as json_file:
         content = json.load(json_file)
-
-    # Добавим текущую дату в контент.
-    content["date"] = datetime.datetime.now()
 
     return render(request, 'products/products.html', content)
