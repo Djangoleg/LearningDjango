@@ -1,13 +1,5 @@
 from django.db import models
 
-'''
-python manage.py makemigrations
-Создание модели в БД.
-python manage.py migrate
-
-В случае чего, удаляем миграции migrations (0001..) и саму БД.
-'''
-
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=64, unique=True)
