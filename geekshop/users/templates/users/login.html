@@ -1,6 +1,5 @@
 {% extends 'users/base.html' %}
 
-
 {% block content %}
     <div class="row justify-content-center">
         <div class="col-lg-5">
@@ -17,14 +16,14 @@
                 <div class="card-body">
                     <form action="{% url 'users:login' %}" method="post">
                         {% csrf_token %}
-{#                        {{ form.as_p }}#}
+                        {# {{ form.as_p }}#}
                         <div class="form-group">
                             <label class="small mb-1" for="inputEmailAddress">Имя пользователя</label>
                             {{ form.username }}
                         </div>
                         <div class="form-group">
                             <label class="small mb-1" for="inputPassword">Пароль</label>
-                           {{ form.password }}
+                            {{ form.password }}
                         </div>
                         <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                             <a class="small" href="#">Забыли пароль?</a>
