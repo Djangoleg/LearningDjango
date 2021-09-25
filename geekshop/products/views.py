@@ -19,10 +19,10 @@ def index(request):
 
 def products(request):
 
-    my_products = Product.objects.all()
     content = {"title": "GeekShop",
                "currency": "руб",
-               "products": my_products}
+               "categories": ProductCategory.objects.all(),
+               "products": Product.objects.all()}
 
     return render(request, 'products/products.html', content)
 
