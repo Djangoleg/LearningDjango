@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib import auth
+from django.contrib import auth, messages
 from django.urls import reverse
 
 # Create your views here.
@@ -33,6 +33,7 @@ def register(request):
         form = UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Успешная регистрация!')
             return HttpResponseRedirect(reverse('users:login'))
     else:
         # Пустая форма если запрос не POST.
