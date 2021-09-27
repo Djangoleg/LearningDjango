@@ -40,10 +40,11 @@ class UserProfileForm(UserChangeForm):
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'image')
 
-    def __init__(self, *args, **kwargs):
-        super(UserProfileForm, self).__init__(*args, **kwargs)
+    def __init__(self,*args,**kwargs):
+        super(UserProfileForm, self).__init__(*args,**kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
+
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control py-4'
 
@@ -53,6 +54,6 @@ class UserProfileForm(UserChangeForm):
     def clean_image(self):
         data = self.cleaned_data['image']
         if data.size > 2024000:
-            raise forms.ValidationError('Размер файла больше 1024 byte')
+            raise forms.ValidationError('Размер файла больше 2024000 byte')
         else:
             return data

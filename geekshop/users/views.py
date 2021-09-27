@@ -54,11 +54,9 @@ def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, instance=request.user, files=request.FILES)
         if form.is_valid():
+            messages.success(request, 'Профиль успешно сохранён!')
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
-        else:
-            # TODO: Вывод ошибок на страницу.
-            print(form.errors)
     else:
         form = UserProfileForm(instance=request.user)
 
