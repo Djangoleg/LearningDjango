@@ -4,7 +4,7 @@ window.onload = () => {
         let t_href = e.target;
 
         $.ajax({
-            url: '../../baskets/edit/' + t_href.name + '/' + t_href.value + '/',
+            url: '/baskets/edit/' + t_href.name + '/' + t_href.value + '/',
             success: (data) => {
                 if (data) {
                     $('.basket_list').html(data.result);
