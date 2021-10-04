@@ -4,8 +4,8 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Создание продукта</h1>
-                <form action="{% url 'admins:admins_product_create' %}" method="post" enctype="multipart/form-data">
+                <h1 class="mt-4">Создание категории</h1>
+                <form action="{% url 'admins:admins_category_create' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="col-lg-6">
@@ -14,6 +14,8 @@
                                 {{ form.name }}
                             </div>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="{{ form.description.id_for_label }}">Описание</label>
@@ -21,33 +23,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row mb-2">
-                        <div class="col-lg-12">
-                            <div class="custom-file">
-                                {{ form.image }}
-                                <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
-                                    изображение</label>
-                            </div>
-                        </div>
-                    </div>
                     <div class="form-row">
-                        <div class="col-lg-6">
-                            <label class="small mb-1" for="{{ form.price.id_for_label }}">Цена</label>
-                            {{ form.price }}
-                        </div>
-                        <div class="col-lg-6">
-                            <label class="small mb-1" for="{{ form.quantity.id_for_label }}">Количество</label>
-                            {{ form.quantity }}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-lg-6">
-                            <label class="small mb-1" for="{{ form.category.id_for_label }}">Категория</label>
-                            {{ form.category }}
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-lg-12" style="margin-top: 33px;">
+                        <div class="col-lg-6" style="margin-top: 33px;">
                             <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                         </div>
                     </div>

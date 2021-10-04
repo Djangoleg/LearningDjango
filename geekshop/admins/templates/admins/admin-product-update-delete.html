@@ -5,28 +5,30 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Редактирование пользователя | {{ user.username }}</h1>
+                <h1 class="mt-4">Редактирование продукта | {{ product.name }}</h1>
                 <div class="card-body">
-                    <form action="{% url 'admins:admins_user_update' user.id %}" method="post"
+                    <form action="{% url 'admins:admins_product_update' product.id %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="small mb-1" for="{{ form.first_name.id_for_label }}">Имя</label>
-                                    {{ form.first_name }}
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="small mb-1"
-                                           for="{{ form.last_name.id_for_label }}">Фамилия</label>
-                                    {{ form.last_name }}
+                                    <label class="small mb-1" for="{{ form.name.id_for_label }}">Название</label>
+                                    {{ form.name }}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-row mb-2">
-                            <div class="col-lg-12">
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="small mb-1"
+                                           for="{{ form.description.id_for_label }}">Описание</label>
+                                    {{ form.description }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6">
                                 <div class="custom-file">
                                     {{ form.image }}
                                     <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
@@ -36,24 +38,31 @@
                         </div>
                         <div class="form-row">
                             <div class="col-lg-6">
-                                <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя
-                                    пользователя</label>
-                                {{ form.username }}
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="small mb-1" for="{{ form.email.id_for_label }}">Адрес электронной
-                                    почты</label>
-                                {{ form.email }}
+                                <label class="small mb-1" for="{{ form.price.id_for_label }}">Цена</label>
+                                {{ form.price }}
                             </div>
                         </div>
-
-                        <div class="col-lg-12" style="margin-top: 33px;">
-                            <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <label class="small mb-1" for="{{ form.quantity.id_for_label }}">Количество</label>
+                                {{ form.quantity }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6">
+                                <label class="small mb-1" for="{{ form.category.id_for_label }}">Категория</label>
+                                {{ form.category }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-6" style="margin-top: 33px;">
+                                <input class="btn btn-info btn-block" type="submit" value="Сохранить">
+                            </div>
                         </div>
                     </form>
-                    <div class="row">
-                        <div class="col-lg-12" style="margin-top: 33px;">
-                            <form action="{% url 'admins:admins_user_delete' user.id %}" method="post">
+                    <div class="form-row">
+                        <div class="col-lg-6" style="margin-top: 33px;">
+                            <form action="{% url 'admins:admins_product_delete' product.id %}" method="post">
                                 {% csrf_token %}
                                 <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                             </form>

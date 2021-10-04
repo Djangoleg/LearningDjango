@@ -5,9 +5,9 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Редактирование продукта | {{ product.name }}</h1>
+                <h1 class="mt-4">Редактирование категории | {{ category.name }}</h1>
                 <div class="card-body">
-                    <form action="{% url 'admins:admins_product_update' product.id %}" method="post"
+                    <form action="{% url 'admins:admins_category_update' category.id %}" method="post"
                           enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-row">
@@ -28,33 +28,6 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-6">
-                                <div class="custom-file">
-                                    {{ form.image }}
-                                    <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
-                                        изображение</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-6">
-                                <label class="small mb-1" for="{{ form.price.id_for_label }}">Цена</label>
-                                {{ form.price }}
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-6">
-                                <label class="small mb-1" for="{{ form.quantity.id_for_label }}">Количество</label>
-                                {{ form.quantity }}
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-6">
-                                <label class="small mb-1" for="{{ form.category.id_for_label }}">Категория</label>
-                                {{ form.category }}
-                            </div>
-                        </div>
-                        <div class="form-row">
                             <div class="col-lg-6" style="margin-top: 33px;">
                                 <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                             </div>
@@ -62,7 +35,7 @@
                     </form>
                     <div class="form-row">
                         <div class="col-lg-6" style="margin-top: 33px;">
-                            <form action="{% url 'admins:admins_product_delete' product.id %}" method="post">
+                            <form action="{% url 'admins:admins_category_delete' category.id %}" method="post">
                                 {% csrf_token %}
                                 <input class="btn btn-danger btn-block" type="submit" value="Удалить">
                             </form>
