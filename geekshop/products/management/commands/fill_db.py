@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 
 from products.models import ProductCategory, Product
+from users.models import User
 
 JSON_PATH = 'products/fixtures/'
 
@@ -35,3 +36,11 @@ class Command(BaseCommand):
             prod['category'] = _category
             new_category = Product(**prod)
             new_category.save()
+
+        """users = load_from_json(JSON_PATH + 'users.json')
+        User.objects.all().delete()
+        for user in users:
+            user_fields = user.get('fields')
+            user_fields['id'] = user.get('pk')
+            new_user = User(**user_fields)
+            new_user.save()"""
