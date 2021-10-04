@@ -105,10 +105,9 @@ class ProductDeleteView(DeleteView, CustomDispatchMixin):
     success_url = reverse_lazy('admins:admins_product')
 
     def delete(self, request, *args, **kwargs):
-        self.object = self.get_object()
         # TODO: Пока не удаляю!
-        # self.object.is_active = False
-        # self.object.save()
+        self.object = self.get_object()
+        self.object.delete()
         return HttpResponseRedirect(self.get_success_url())
 
 
