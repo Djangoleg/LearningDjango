@@ -13,14 +13,20 @@
                     <li class="list-group-item bg-light">
                         <div class="row text-center">
                             <div class="col-lg-4">
-                                <input name="{{ basket.id }}" type="number" class="form-control"
-                                       value="{{ basket.quantity }}" min="0">
+                                <form action="{% url 'baskets:basket_edit' basket_id=basket.id quantity=basket.quantity%}" method="get">
+                                    {% csrf_token %}
+                                    <input name="{{ basket.id }}" type="number" class="form-control"
+                                           value="{{ basket.quantity }}" min="0">
+                                </form>
                             </div>
                             <div class="col-lg-4">{{ basket.sum }} руб.</div>
                             <div class="col-lg-4">
-                                <a href="{% url 'baskets:basket_remove' basket.id %}">
-                                    <i class="fas fa-trash"></i>
-                                </a>
+                                <form action="{% url 'baskets:basket_remove' pk=basket.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-small">
+                                        <span class="fas fa-trash"></span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </li>
