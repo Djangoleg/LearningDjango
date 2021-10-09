@@ -14,4 +14,9 @@ window.onload = () => {
 
         e.preventDefault();
     });
+    /*
+    $('.list-group').on('click', 'button[type="submit"]', (e) => {
+
+    });
+     */
 }

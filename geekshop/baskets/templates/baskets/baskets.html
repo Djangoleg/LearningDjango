@@ -13,7 +13,7 @@
                     <li class="list-group-item bg-light">
                         <div class="row text-center">
                             <div class="col-lg-4">
-                                <form action="{% url 'baskets:basket_edit' basket_id=basket.id quantity=basket.quantity%}" method="get">
+                                <form action="{% url 'baskets:basket_edit' basket_id=basket.id quantity=basket.quantity%}" >
                                     {% csrf_token %}
                                     <input name="{{ basket.id }}" type="number" class="form-control"
                                            value="{{ basket.quantity }}" min="0">

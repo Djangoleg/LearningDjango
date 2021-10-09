@@ -1,8 +1,11 @@
 import datetime
 import json
-from django.shortcuts import render
+
+from django.http import JsonResponse
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView
 
 from geekshop.mixin import UserDispatchMixin
 from .models import ProductCategory, Product
@@ -24,6 +27,7 @@ class ProductListView(ListView):
     model = Product
     template_name = 'products/products.html'
     context_object_name = 'products'
+    success_url = reverse_lazy('products:index')
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
