@@ -70,7 +70,7 @@ class BasketUpdateView(UpdateView, UserDispatchMixin):
                 else:
                     basket.delete()
 
-            result = render_to_string('baskets/baskets.html', self.get_context_data(*args, **kwargs))
+            result = render_to_string('baskets/baskets.html', self.get_context_data(*args, **kwargs), request=request)
 
             return JsonResponse({'result': result})
 
