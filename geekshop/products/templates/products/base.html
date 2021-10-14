@@ -4,6 +4,7 @@
 
 <head>
 
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -40,7 +41,7 @@
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:profile' %}">User
+                        <a class="nav-link" href="{% url 'users:profile' %}">{{ user.username }}
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </li>

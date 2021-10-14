@@ -14,4 +14,34 @@ window.onload = () => {
 
         e.preventDefault();
     });
+
+
+    $('.product_add').on('click', 'button[type="button"]', (e) => {
+        $(document).on('click', '.product_add', (e) => {
+
+            let t_href = e.target;
+            let csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+            let page_id = t_href.value;
+
+            $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": csrf_token
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '/baskets/add/' + t_href.name + '/',
+                data: {'page_id': page_id},
+                success: (data) => {
+                    if (data) {
+                        $('.product_items').html(data.result);
+                    }
+                },
+            });
+
+            e.preventDefault();
+        });
+    });
 }
