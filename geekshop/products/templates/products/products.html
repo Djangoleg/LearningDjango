@@ -64,36 +64,7 @@
                     </a>
                 </div>
 
-                <div class="row">
-
-                    {% for product in products %}
-
-                        <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card h-100">
-                                <a href="#">
-                                    <img class="card-img-top"
-                                         src="{{ product.image.url }}"
-                                         alt="">
-                                </a>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a href="#">{{ product.name }}</a>
-                                    </h4>
-                                    <h5>{{ product.price }} {{ currency }}.</h5>
-                                    <p class="card-text">{{ product.description }}</p>
-                                </div>
-                                <form action="{% url 'baskets:basket' product_id=product.id %}" method="post">
-                                    {% csrf_token %}
-                                    <div class="card-footer text-center">
-                                        <button type="submit" class="btn btn-outline-success">Отправить
-                                            в корзину
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                {% include 'include/product_items.html' %}
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
@@ -106,6 +77,7 @@
                             <li class="page-item"><a class="page-link"
                                                      href="{% url 'products:page' page %}">{{ page }}</a></li>
                         {% endfor %}
+
                         <li class="page-item {% if not products.has_next %} disabled {% endif %}">
                             <a class="page-link"
                                href="{% if products.has_next %} {% url 'products:page' products.next_page_number %} {% else %} # {% endif %}">Next</a>

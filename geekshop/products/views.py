@@ -41,11 +41,14 @@ class ProductListView(ListView):
         if 'category_id' in self.kwargs:
             category_id = self.kwargs['category_id']
 
+        # Передача в сессию ИД выбранный категории. Далее используется при формировании корзины в baskets\views.py
+        self.request.session['category_id'] = category_id
+
         if 'page_id' in self.kwargs:
             page_id = self.kwargs['page_id']
 
         products = Product.objects.filter(
-            category_id=category_id) if category_id is not None else Product.objects.all()
+            category_id=category_id) if category_id is not None else Product.objects.all().order_by('id')
 
         paginator = Paginator(products, per_page=3)
 

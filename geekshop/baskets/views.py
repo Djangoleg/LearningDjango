@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import JsonResponse
 from django.shortcuts import redirect
 
@@ -8,7 +9,7 @@ from django.views.generic import DeleteView, CreateView, UpdateView
 
 from baskets.models import Basket
 from geekshop.mixin import UserDispatchMixin
-from products.models import Product
+from products.models import Product, ProductCategory
 
 
 class BasketCreateView(CreateView, UserDispatchMixin):
@@ -33,7 +34,34 @@ class BasketCreateView(CreateView, UserDispatchMixin):
                     basket.quantity += 1
                     basket.save()
 
-        return redirect(self.success_url)
+        category_id = self.request.session['category_id']
+
+        products = Product.objects.filter(
+            category_id=category_id) if category_id is not None else Product.objects.all().order_by('id')
+
+        page_id = 1
+        if request.POST.get('page_id'):
+            page_id = int(request.POST.get('page_id'))
+
+        paginator = Paginator(products.order_by('id'), per_page=3)
+
+        try:
+            products_paginator = paginator.page(page_id)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
+
+        context = {
+            'products': products_paginator,
+            'currency': "руб",
+        }
+
+        result = render_to_string('include/product_items.html', context, request=request)
+
+        return JsonResponse({'result': result})
+
+        # return redirect(self.success_url)
 
 
 class BasketDeleteView(DeleteView, UserDispatchMixin):
