@@ -61,8 +61,6 @@ class BasketCreateView(CreateView, UserDispatchMixin):
 
         return JsonResponse({'result': result})
 
-        # return redirect(self.success_url)
-
 
 class BasketDeleteView(DeleteView, UserDispatchMixin):
     model = Basket
@@ -79,26 +77,21 @@ class BasketUpdateView(UpdateView, UserDispatchMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(BasketUpdateView, self).get_context_data(**kwargs)
-        context['baskets'] = Basket.objects.filter(user=self.request.user)
-        return context
-
     def get(self, request, *args, **kwargs):
         super(BasketUpdateView, self).get(request, *args, **kwargs)
         if request.is_ajax():
             basket_id = kwargs[self.pk_url_kwarg]
             quantity = kwargs['quantity']
-            baskets = Basket.objects.filter(id=basket_id)
-            if baskets.exists():
-                basket = baskets.first()
+            basket = Basket.objects.filter(id=basket_id)
+            if basket.exists():
+                basket = basket.first()
                 if quantity > 0:
                     basket.quantity = quantity
                     basket.save()
                 else:
                     basket.delete()
 
-            result = render_to_string('baskets/baskets.html', self.get_context_data(*args, **kwargs), request=request)
+            result = render_to_string('baskets/baskets.html', request=request)
 
             return JsonResponse({'result': result})
 
