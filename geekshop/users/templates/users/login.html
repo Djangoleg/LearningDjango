@@ -4,7 +4,8 @@
     <div class="row justify-content-center">
         <div class="col-lg-5">
             {% if form.errors or messages %}
-                <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %} alert-dismissible fade show" role="alert"
+                <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %} alert-dismissible fade show"
+                     role="alert"
                      style="margin-top: 50px;">
                     {% if messages %}
                         {% for message in messages %}
@@ -40,6 +41,11 @@
                             <input class="btn btn-primary" type="submit" value="Авторизоваться">
                         </div>
                     </form>
+                </div>
+                <div class="list-group-horizontal card-footer text-center small">
+                    <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+                        <i class="fab fa-vk"></i>
+                    </a>
                 </div>
                 <div class="card-footer text-center">
                     <div class="small"><a href="{% url 'users:register' %}">Нужен аккаунт? Зарегистрируйся!</a></div>
