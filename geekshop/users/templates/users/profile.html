@@ -83,12 +83,15 @@
                             {{ profile.tagLine }}
                         </div>
                         <div class="col-lg-6">
-                            <label class="small mb-1" for="{{ profile.about.id_for_label }}">О пользователе</label>
-                            {{ profile.about }}
+                            <label class="small mb-1" for="{{ profile.languages.id_for_label }}">Язык</label>
+                            {{ profile.languages }}
                         </div>
                     </div>
                     <div class="form-row">
-
+                        <div class="col-lg-6">
+                            <label class="small mb-1" for="{{ profile.about.id_for_label }}">О пользователе</label>
+                            {{ profile.about }}
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="col-lg-12" style="margin-top: 33px;">
