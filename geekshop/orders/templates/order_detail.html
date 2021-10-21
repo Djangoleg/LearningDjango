@@ -1,8 +1,8 @@
-{% extends "mainapp/base.html" %}
+{% extends "products/base.html" %}
 {% load static %}
 
 {% block content %}
-    {% include 'ordersapp/includes/inc_order_summary.html' %}
+    {% include 'include/inc_order_summary.html' %}
     <div class="basket_list">
         {% for item in object.orderitems.select_related %}
             <div class="basket_record">
@@ -24,6 +24,6 @@
             </div>
         {% endfor %}
     </div>
-    {% include 'ordersapp/includes/inc_order_actions.html' %}
+    {% include 'include/inc_order_actions.html' %}
 
 {% endblock %}
