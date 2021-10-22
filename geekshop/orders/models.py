@@ -5,12 +5,15 @@ from products.models import Product
 
 
 class Order(models.Model):
+
     FORMING = 'FM'
     SENT_TO_PROCEED = 'STP'
     PROCEEDED = 'PRD'
     PAID = 'PD'
     READY = 'RDY'
     CANCEL = 'CNC'
+
+    statuses = (FORMING, SENT_TO_PROCEED, PROCEEDED, PAID, READY, CANCEL)
 
     ORDER_STATUS_CHOICES = (
         (FORMING, 'формируется'),

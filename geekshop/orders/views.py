@@ -126,3 +126,16 @@ def order_forming_complete(request, pk):
     order.save()
 
     return HttpResponseRedirect(reverse('orders:list'))
+
+
+def status_change(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    index = Order.statuses.index(order.status)
+    if index == len(Order.statuses) - 1:
+        index = 0
+    else:
+        index += 1
+    order.status = Order.statuses[index]
+    order.save()
+
+    return HttpResponseRedirect(reverse('orders:list'))
