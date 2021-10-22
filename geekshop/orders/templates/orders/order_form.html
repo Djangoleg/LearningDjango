@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    {% include 'include/inc_order_summary.html' %}
+    {% include 'orders/include/inc_order_summary.html' %}
     <div class="order_form">
         <form action="" method="post">
             {% csrf_token %}
@@ -49,7 +49,7 @@
             </table>
             <button type="submit" value="сохранить" class="btn btn-default btn-round form-control last">сохранить
             </button>
-            {% include 'include/inc_order_actions.html' %}
+            {% include 'orders/include/inc_order_actions.html' %}
         </form>
     </div>
 
