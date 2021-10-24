@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener("load", () => {
 
     $('.basket_list').on('click', 'input[type="number"]', (e) => {
         let t_href = e.target;
@@ -43,5 +43,9 @@ window.onload = () => {
 
             e.preventDefault();
         });
+        e.preventDefault();
     });
-}
+
+},false);
+
+
