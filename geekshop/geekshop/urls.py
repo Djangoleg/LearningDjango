@@ -30,6 +30,7 @@ urlpatterns = [
     path('admins/', include('admins.urls', namespace='admins')),
     # Авторизация через соц. сети.
     path('', include('social_django.urls', namespace='social')),
+    path('orders/', include('orders.urls', namespace='orders')),
 ]
 
 if settings.DEBUG:
