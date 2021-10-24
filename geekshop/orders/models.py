@@ -1,11 +1,13 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import pre_delete, pre_save
+from django.dispatch import receiver
 
+from baskets.models import Basket
 from products.models import Product
 
 
 class Order(models.Model):
-
     FORMING = 'FM'
     SENT_TO_PROCEED = 'STP'
     PROCEEDED = 'PRD'
@@ -49,7 +51,7 @@ class Order(models.Model):
         items = self.orderitems.select_related()
         return sum(list(map(lambda x: x.quantity * x.product.price, items)))
 
-    def get_items(self):
+    def get_item(self):
         pass
 
     # Переопределяем метод, удаляющий объект.
@@ -69,3 +71,24 @@ class OrderItem(models.Model):
 
     def get_product_cost(self):
         return self.product.price * self.quantity
+
+    @staticmethod
+    def get_item(pk):
+        return OrderItem.objects.filter(pk=pk).first().quantity
+
+
+@receiver(pre_delete, sender=Basket)
+@receiver(pre_delete, sender=OrderItem)
+def product_quantity_update_delete(sender, instance, **kwargs):
+    instance.product.quantity += instance.quantity
+    instance.product.save()
+
+
+@receiver(pre_save, sender=Basket)
+@receiver(pre_save, sender=OrderItem)
+def product_quantity_update_delete(sender, instance, **kwargs):
+    if instance.pk:
+        instance.product.quantity -= instance.quantity - instance.get_item(instance.pk)
+    else:
+        instance.product.quantity -= instance.quantity
+    instance.product.save()
