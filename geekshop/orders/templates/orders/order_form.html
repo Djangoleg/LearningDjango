@@ -33,6 +33,7 @@
 
                                 {% if field.name == 'price' %}
                                     {% if not field.value %}
+                                        <span class="orderitems-{{ forloop.parentloop.counter0 }}-price"></span>
                                     {% else %}
                                         <span class="orderitems-{{ forloop.parentloop.counter0 }}-price">
                                             {{ field.value}} руб </span>
