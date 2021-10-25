@@ -122,7 +122,12 @@ class OrderDetail(DetailView, BaseClassContextMixin):
 
     @staticmethod
     def get_product_price(request, product_id):
-        price = Product.objects.filter(id=product_id).first().price
+        price = int()
+        try:
+            price = Product.objects.filter(id=product_id).first().price
+        except AttributeError as e:
+            print(e)
+
         return JsonResponse({'price': price})
 
 
