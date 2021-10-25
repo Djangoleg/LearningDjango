@@ -74,6 +74,8 @@ window.addEventListener("load", () => {
                 },
             });
         } else {
+            price_arr.splice(orderitem_num, 1);
+            quantity_arr.splice(orderitem_num, 1);
             $('.orderitems-' + orderitem_num + '-price').text('');
         }
 
