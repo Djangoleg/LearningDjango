@@ -69,10 +69,12 @@ window.addEventListener("load", () => {
                     }
                 },
             });
-        } else {
-            price_arr.splice(orderitem_num, 1);
-            $('.orderitems-' + orderitem_num + '-price').text('');
-        }
+        } //else {
+        //     price_arr.splice(orderitem_num, 1);
+        //     quantity_arr.splice(orderitem_num, 1);
+        //     deleteOrderItem($('.formset_row')[orderitem_num]);
+        //     $('.orderitems-' + orderitem_num + '-price').text('');
+        // }
 
         e.preventDefault();
     });
