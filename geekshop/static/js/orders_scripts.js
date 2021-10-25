@@ -58,6 +58,7 @@ window.addEventListener("load", () => {
     $('.order_form select').on('change', (e) => {
         let target = e.target;
         let orderitem_num = target.name.match(/\d+/)[0];
+
         $('input[name=orderitems-' + orderitem_num + '-quantity').val(0);
         // Пересчитать.
         orderSummerUpdate(price_arr[orderitem_num], -quantity_arr[orderitem_num]);
@@ -69,7 +70,7 @@ window.addEventListener("load", () => {
                 success: (data) => {
                     if (data) {
                         $('.orderitems-' + orderitem_num + '-price').text(data.price + ' руб');
-                        price_arr[orderitem_num] = parseInt(data.price);
+                        price_arr[orderitem_num] = parseFloat(data.price);
                     }
                 },
             });
