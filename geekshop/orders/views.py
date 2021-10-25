@@ -67,7 +67,7 @@ class OrderCreate(CreateView):
 
             if self.object.get_total_cost() == 0:
                 self.object.delete()
-        
+
         return super(OrderCreate, self).form_valid(form)
 
 
@@ -120,10 +120,10 @@ class OrderDetail(DetailView, BaseClassContextMixin):
     model = Order
     title = 'GeekShop | Просмотр заказа'
 
-
-def get_product_price(request, product_id):
-    price = Product.objects.filter(id=product_id).first().price
-    return JsonResponse({'price': price})
+    @staticmethod
+    def get_product_price(request, product_id):
+        price = Product.objects.filter(id=product_id).first().price
+        return JsonResponse({'price': price})
 
 
 def order_forming_complete(request, pk):

@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import OrderCreate, OrderUpdate, OrderDelete, OrderDetail, OrderList, order_forming_complete, status_change, \
-    get_product_price
+from .views import OrderCreate, OrderUpdate, OrderDelete, OrderDetail, OrderList, order_forming_complete, status_change
 
 app_name = 'orders'
 
@@ -16,5 +15,5 @@ urlpatterns = [
     path('delete/<int:pk>/', OrderDelete.as_view(), name='delete'),
     path('forming_complete/<int:pk>/', order_forming_complete, name='forming_complete'),
 
-    path('get_product_price/<int:product_id>/', get_product_price, name='get_product_price'),
+    path('get_product_price/<int:product_id>/', OrderDetail.get_product_price, name='get_product_price'),
 ]
