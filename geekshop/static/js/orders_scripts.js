@@ -55,6 +55,28 @@ window.addEventListener("load", () => {
         removed: deleteOrderItem,
     });
 
+    $('.order_form select').on('change', (e) => {
+        let target = e.target;
+        let orderitem_num = target.name.match(/\d+/)[0];
+        if (target.value) {
+            $.ajax({
+                url: '/orders/get_product_price/' + target.value + '/',
+                success: (data) => {
+                    if (data) {
+                        //console.info(data.price);
+                        $('.orderitems-' + orderitem_num + '-price').text(data.price + ' руб');
+                        price_arr[orderitem_num] = parseInt(data.price);
+                    }
+                },
+            });
+        } else {
+            price_arr.splice(orderitem_num, 1);
+            $('.orderitems-' + orderitem_num + '-price').text('');
+        }
+
+        e.preventDefault();
+    });
+
     function deleteOrderItem(row) {
         let target_name = row[0].querySelector('input[type="number"]').name;
         orderitem_num = parseInt(target_name.replace('orderitems-', '').replace('-quantity', ''));
@@ -71,4 +93,4 @@ window.addEventListener("load", () => {
         $('.order_total_cost').html(order_total_price.toString() + ',00');
     }
 
-},false);
+}, false);
