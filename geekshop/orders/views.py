@@ -1,6 +1,6 @@
 from django.db import transaction
 from django.forms import inlineformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -12,6 +12,7 @@ from baskets.models import Basket
 from geekshop.mixin import BaseClassContextMixin
 from orders.forms import OrderItemsForm
 from orders.models import Order, OrderItem
+from products.models import Product
 
 
 class OrderList(ListView):
@@ -118,6 +119,11 @@ class OrderDelete(DeleteView):
 class OrderDetail(DetailView, BaseClassContextMixin):
     model = Order
     title = 'GeekShop | Просмотр заказа'
+
+
+def get_product_price(request, product_id):
+    price = Product.objects.filter(id=product_id).first().price
+    return JsonResponse({'price': price})
 
 
 def order_forming_complete(request, pk):
