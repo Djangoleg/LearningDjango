@@ -122,14 +122,14 @@ class OrderDetail(DetailView, BaseClassContextMixin):
 
     @staticmethod
     def get_product_price(request, product_id):
+        price = float()
         if request.is_ajax():
-            price = float()
             try:
                 price = Product.objects.filter(id=product_id).first().price
             except AttributeError as e:
                 print(e)
 
-            return JsonResponse({'price': price})
+        return JsonResponse({'price': price})
 
 
 def order_forming_complete(request, pk):
