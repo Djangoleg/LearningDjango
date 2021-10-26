@@ -62,12 +62,14 @@ window.addEventListener("load", () => {
 
         $('input[name=orderitems-' + orderitem_num + '-quantity').val(0);
         // Пересчитать.
-        quantity_arr[orderitem_num] = 0;
+        if (quantity_arr[orderitem_num] === undefined) {
+            quantity_arr[orderitem_num] = 0;
+        }
         if (price_arr[orderitem_num] === undefined) {
             price_arr[orderitem_num] = 0;
         }
         orderSummerUpdate(price_arr[orderitem_num], -quantity_arr[orderitem_num]);
-
+        quantity_arr[orderitem_num] = 0;
 
         if (target.value) {
             $.ajax({
