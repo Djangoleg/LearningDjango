@@ -55,21 +55,30 @@ window.addEventListener("load", () => {
         removed: deleteOrderItem,
     });
 
-    $('.order_form select').on('change', (e) => {
+    $(document).on('change', '.order_form select', (e) => {
+    // $('.order_form select').on('change', (e) => {
         let target = e.target;
-        let orderitem_num = target.name.match(/\d+/)[0];
+        let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-product', ''));
 
         $('input[name=orderitems-' + orderitem_num + '-quantity').val(0);
         // Пересчитать.
-        orderSummerUpdate(price_arr[orderitem_num], -quantity_arr[orderitem_num]);
         quantity_arr[orderitem_num] = 0;
+        if (price_arr[orderitem_num] === undefined) {
+            price_arr[orderitem_num] = 0;
+        }
+        orderSummerUpdate(price_arr[orderitem_num], -quantity_arr[orderitem_num]);
+
 
         if (target.value) {
             $.ajax({
                 url: '/orders/get_product_price/' + target.value + '/',
                 success: (data) => {
                     if (data) {
-                        $('.orderitems-' + orderitem_num + '-price').text(data.price + ' руб');
+                        // $('.orderitems-' + orderitem_num + '-price').text(data.price + ' руб');
+                        let price_html = '<span class="orderitems-' + orderitem_num + '-price">' + data.price.toString().replace('.', ',') + '</span> руб';
+                        let current_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
+                        current_tr.find('td:eq(2)').html(price_html);
+
                         price_arr[orderitem_num] = parseFloat(data.price);
                     }
                 },
