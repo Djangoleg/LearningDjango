@@ -25,4 +25,7 @@ urlpatterns = [
     path('category/<int:category_id>/', ProductListView.as_view(), name='category'),
     path('page/<int:page_id>/', ProductListView.as_view(), name='page'),
     path('detail/<int:pk>/', cache_page(3600)(ProductDetail.as_view()), name='detail'),
+
+    path('category/<int:category_id>/ajax/', cache_page(3600)(ProductListView().get_products_ajax), name='category_ajax'),
+    path('page/<int:page_id>/ajax/', cache_page(3600)(ProductListView().get_products_ajax), name='page_ajax'),
 ]

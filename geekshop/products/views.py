@@ -4,6 +4,7 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView
 from django.conf import settings
@@ -73,6 +74,30 @@ def get_products_in_category_orederd_by_price(category_id):
         return Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
 
 
+def get_links_menu():
+    if settings.LOW_CACHE:
+        key = 'links_menu'
+        links_menu = cache.get(key)
+        if links_menu is None:
+            links_menu = ProductCategory.objects.all()
+            cache.set(key, links_menu)
+        return links_menu
+    else:
+        return ProductCategory.objects.all()
+
+
+def get_category(pk):
+    if settings.LOW_CACHE:
+        key = f'category_{pk}'
+        category = cache.get(key)
+        if category is None:
+            category = get_object_or_404(ProductCategory, pk=pk)
+            cache.set(key, category)
+        return category
+    else:
+        return get_object_or_404(ProductCategory, pk=pk)
+
+
 class ProductListView(ListView):
     model = Product
     template_name = 'products/products.html'
@@ -100,7 +125,8 @@ class ProductListView(ListView):
         # products = Product.objects.filter( category_id=category_id).order_by('id') if category_id is not None else
         # Product.objects.all().order_by('id')
 
-        products = get_products_in_category_orederd_by_price(category_id) if category_id is not None else get_link_product()
+        products = get_products_in_category_orederd_by_price(
+            category_id) if category_id is not None else get_link_product()
 
         paginator = Paginator(products, per_page=3)
 
@@ -114,6 +140,48 @@ class ProductListView(ListView):
         context['products'] = products_paginator
 
         return context
+
+    def get_products_ajax(self, request, *args, **kwargs):
+        category_id = int()
+        if 'category_id' in kwargs:
+            category_id = kwargs['category_id']
+        page_id = 1
+        if 'page_id' in kwargs:
+            page_id = kwargs['page_id']
+
+        if request.is_ajax():
+            links_menu = get_links_menu()
+            if category_id:
+                if category_id == '0':
+                    category = {
+                        'pk': 0,
+                        'name': 'Все категории'
+                    }
+                    products = get_link_product()
+                else:
+                    category = get_category(category_id)
+                    products = get_products_in_category_orederd_by_price(category_id)
+
+                paginator = Paginator(products, 2)
+                try:
+                    products_paginator = paginator.page(page_id)
+                except PageNotAnInteger:
+                    products_paginator = paginator.page(1)
+                except EmptyPage:
+                    products_paginator = paginator.page(paginator.num_pages)
+
+        content = {
+            'links_menu': links_menu,
+            'category': category,
+            'products': products_paginator,
+        }
+
+        result = render_to_string(
+            'include/products_list_content.html',
+            context=content,
+            request=request)
+
+        return JsonResponse({'result': result})
 
 
 class ProductDetail(DetailView):

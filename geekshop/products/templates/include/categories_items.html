@@ -2,15 +2,8 @@
     <h1 class="my-4">GeekShop</h1>
     <div class="list-group">
         {% for category in categories %}
-            <form action="{% url 'products:category' category_id=category.id %}">
-                {% csrf_token %}
-                <button name="{{ category.id }}" type="submit" class="btn btn-lg">{{ category }}</button>
-            </form>
+            <a href="{% url 'products:category' category.id %}" class="list-group-item">{{ category }}</a>
         {% endfor %}
-        <form action="{% url 'products:index' %}">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-lg">Все категории</button>
-        </form>
-
+        <a href="{% url 'products:index' %}" class="list-group-item">Все категории</a>
     </div>
 </div>
