@@ -42,11 +42,11 @@ def get_link_product():
         key = 'links_product'
         link_product = cache.get(key)
         if link_product is None:
-            link_product = Product.objects.all().select_related('category')
+            link_product = Product.objects.all().order_by('price').select_related('category')
             cache.set(key, link_product)
         return link_product
     else:
-        return Product.objects.all().select_related('category')
+        return Product.objects.all().order_by('price').select_related('category')
 
 
 def get_product(pk):
@@ -59,6 +59,18 @@ def get_product(pk):
         return product
     else:
         return get_object_or_404(Product, pk=pk)
+
+
+def get_products_in_category_orederd_by_price(category_id):
+    if settings.LOW_CACHE:
+        key = f'products_in_category_orederd_by_price_{category_id}'
+        products = cache.get(key)
+        if products is None:
+            products = Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
+            cache.set(key, products)
+        return products
+    else:
+        return Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
 
 
 class ProductListView(ListView):
@@ -85,8 +97,10 @@ class ProductListView(ListView):
         if 'page_id' in self.kwargs:
             page_id = self.kwargs['page_id']
 
-        products = Product.objects.filter(
-            category_id=category_id).order_by('id') if category_id is not None else Product.objects.all().order_by('id')
+        # products = Product.objects.filter( category_id=category_id).order_by('id') if category_id is not None else
+        # Product.objects.all().order_by('id')
+
+        products = get_products_in_category_orederd_by_price(category_id) if category_id is not None else get_link_product()
 
         paginator = Paginator(products, per_page=3)
 
@@ -115,5 +129,5 @@ class ProductDetail(DetailView):
         context = super().get_context_data()
 
         context['product'] = get_product(self.kwargs.get('pk'))
-        context['categories'] = ProductCategory.objects.all()
+        context['categories'] = get_links_category()
         return context

@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+<div class="col-lg-3">
+    <h1 class="my-4">GeekShop</h1>
+    <div class="list-group">
+        {% for category in categories %}
+            <form action="{% url 'products:category' category_id=category.id %}">
+                {% csrf_token %}
+                <button name="{{ category.id }}" type="submit" class="btn btn-lg">{{ category }}</button>
+            </form>
+        {% endfor %}
+        <form action="{% url 'products:index' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-lg">Все категории</button>
+        </form>
+
+    </div>
+</div>

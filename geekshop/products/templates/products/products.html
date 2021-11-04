@@ -12,24 +12,7 @@
 
         <div class="row">
 
-            <div class="col-lg-3">
-
-                <h1 class="my-4">GeekShop</h1>
-                <div class="list-group">
-                    {% for category in categories %}
-                        <form action="{% url 'products:category' category_id=category.id %}" >
-                            {% csrf_token %}
-                            <button name="{{ category.id }}" type="submit" class="btn btn-lg">{{ category }}</button>
-                        </form>
-                    {% endfor %}
-                    <form action="{% url 'products:index' %}" >
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-lg">Все категории</button>
-                    </form>
-
-                </div>
-
-            </div>
+            {% include 'include/categories_items.html' %}
             <!-- /.col-lg-3 -->
 
             <div class="col-lg-9">
