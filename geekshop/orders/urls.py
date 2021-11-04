@@ -1,15 +1,16 @@
 from django.urls import path
+from django.views.decorators.cache import never_cache
 
 from .views import OrderCreate, OrderUpdate, OrderDelete, OrderDetail, OrderList, order_forming_complete, status_change
 
 app_name = 'orders'
 
 urlpatterns = [
-    path('', OrderList.as_view(), name='list'),
+    path('', never_cache(OrderList.as_view()), name='list'),
     path('create/', OrderCreate.as_view(), name='create'),
     path('read/<int:pk>/', OrderDetail.as_view(), name='read'),
 
-    path('update/<int:pk>/', OrderUpdate.as_view(), name='update'),
+    path('update/<int:pk>/', never_cache(OrderUpdate.as_view()), name='update'),
     path('status_change/<int:pk>/', status_change, name='status_change'),
 
     path('delete/<int:pk>/', OrderDelete.as_view(), name='delete'),
