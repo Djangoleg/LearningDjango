@@ -56,7 +56,7 @@ window.addEventListener("load", () => {
     });
 
     $(document).on('change', '.order_form select', (e) => {
-    // $('.order_form select').on('change', (e) => {
+
         let target = e.target;
         let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-product', ''));
 
