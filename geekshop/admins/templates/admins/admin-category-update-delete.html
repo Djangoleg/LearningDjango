@@ -28,19 +28,20 @@
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="col-lg-0">
+                                <div class="form-group">
+                                    {{ form.is_active }}
+                                    <label class="small mb-1"
+                                           for="{{ form.is_active.id_for_label }}">Активна</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col-lg-6" style="margin-top: 33px;">
                                 <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                             </div>
                         </div>
                     </form>
-                    <div class="form-row">
-                        <div class="col-lg-6" style="margin-top: 33px;">
-                            <form action="{% url 'admins:admins_category_delete' category.id %}" method="post">
-                                {% csrf_token %}
-                                <input class="btn btn-danger btn-block" type="submit" value="Удалить">
-                            </form>
-                        </div>
-                    </div>
                 </div>
             </div>
         </main>
