@@ -17,6 +17,9 @@ from .models import ProductCategory, Product
 # Create your views here.
 
 def index(request):
+
+    request.session['category_id'] = None
+
     content = {
         'title': 'GeekShop',
         'header': 'GeekShop Store',

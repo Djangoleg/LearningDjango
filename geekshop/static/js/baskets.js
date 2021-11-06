@@ -15,6 +15,15 @@ window.addEventListener("load", () => {
         e.preventDefault();
     });
 
+    function showAlert(alertNum) {
+        if (alertNum) {
+            $('#button-' + alertNum).popover('show');
+            setTimeout(function () {
+                $('#button-' + alertNum).popover('hide');
+            }, 3000);
+        }
+    }
+
 
     $(document).on('click', '.product_add', (e) => {
 
@@ -36,6 +45,7 @@ window.addEventListener("load", () => {
             success: (data) => {
                 if (data) {
                     $('.product_items').html(data.result);
+                    showAlert(t_href.name);
                 }
             },
         });

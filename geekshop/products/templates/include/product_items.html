@@ -17,9 +17,14 @@
                     </div>
                     <div class="card-footer text-center">
                         <div class="product_add">
+
                             <button type="button" name="{{ product.id }}" value="{{ products.number }}"
-                                    class="btn btn-outline-success">Отправить в корзину
+                                    data-container="body" data-toggle="popover" data-placement="top"
+                                    data-content="Товар добавлен в корзину"
+                                    class="btn btn-outline-success" id="button-{{ product.id }}">
+                                Отправить в корзину
                             </button>
+
                         </div>
                     </div>
                 </div>
