@@ -62,16 +62,19 @@ def get_product(pk):
         return get_object_or_404(Product, pk=pk)
 
 
-def get_products_in_category_orederd_by_price(category_id):
-    if settings.LOW_CACHE:
-        key = f'products_in_category_orederd_by_price_{category_id}'
-        products = cache.get(key)
-        if products is None:
-            products = Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
-            cache.set(key, products)
-        return products
+def get_products_in_category_orederd_by_price(category_id=None):
+    if category_id:
+        if settings.LOW_CACHE:
+            key = f'products_in_category_orederd_by_price_{category_id}'
+            products = cache.get(key)
+            if products is None:
+                products = Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
+                cache.set(key, products)
+            return products
+        else:
+            return Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
     else:
-        return Product.objects.filter(category_id=category_id, is_active=True).order_by('price')
+        return Product.objects.filter(is_active=True).order_by('price')
 
 
 def get_links_menu():
@@ -159,6 +162,8 @@ class ProductListView(ListView):
                     }
                     products = get_link_product()
                 else:
+                    # Передача в сессию ИД выбранный категории. Далее используется при формировании корзины в baskets\views.py
+                    request.session['category_id'] = category_id
                     category = get_category(category_id)
                     products = get_products_in_category_orederd_by_price(category_id)
 
@@ -174,6 +179,7 @@ class ProductListView(ListView):
             'links_menu': links_menu,
             'category': category,
             'products': products_paginator,
+            'currency': "руб",
         }
 
         result = render_to_string(

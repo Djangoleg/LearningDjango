@@ -10,6 +10,7 @@ from django.views.generic import DeleteView, CreateView, UpdateView
 from baskets.models import Basket
 from geekshop.mixin import UserDispatchMixin
 from products.models import Product, ProductCategory
+from products.views import get_products_in_category_orederd_by_price
 
 
 class BasketCreateView(CreateView, UserDispatchMixin):
@@ -36,14 +37,13 @@ class BasketCreateView(CreateView, UserDispatchMixin):
 
         category_id = self.request.session['category_id']
 
-        products = Product.objects.filter(
-            category_id=category_id) if category_id is not None else Product.objects.all().order_by('id')
+        products = get_products_in_category_orederd_by_price(category_id)
 
         page_id = 1
         if request.POST.get('page_id'):
             page_id = int(request.POST.get('page_id'))
 
-        paginator = Paginator(products.order_by('id'), per_page=3)
+        paginator = Paginator(products, per_page=3)
 
         try:
             products_paginator = paginator.page(page_id)
