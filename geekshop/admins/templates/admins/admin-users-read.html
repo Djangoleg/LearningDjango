@@ -21,6 +21,7 @@
                                     <th>Адрес эл. почты</th>
                                     <th>Персонал сайта</th>
                                     <th>Активный</th>
+                                    <th>Действие</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -31,6 +32,7 @@
                                     <th>Адрес эл. почты</th>
                                     <th>Персонал сайта</th>
                                     <th>Активный</th>
+                                    <th>Действие</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -51,8 +53,6 @@
                                                 <i class="fas fa-times-circle"></i>
                                             {% endif %}
                                         </td>
-
-
                                         <td class="text-center">
                                             {% if user.is_active %}
                                                 <i class="fas fa-check-circle"></i>
@@ -61,8 +61,12 @@
                                                 <i class="fas fa-times-circle"></i>
                                             {% endif %}
                                         </td>
-
-
+                                        <td>
+                                            <form action="{% url 'admins:admins_user_delete' user.id %}" method="post">
+                                                {% csrf_token %}
+                                                <input class="btn btn-link" type="submit" value="Удалить">
+                                            </form>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

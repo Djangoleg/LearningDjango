@@ -1,7 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 # from django.contrib.auth.forms import
@@ -37,6 +38,17 @@ class UserCreateView(CreateView, CustomDispatchMixin):
         context = super(UserCreateView, self).get_context_data(**kwargs)
         context['title'] = 'Админка | Регистрация'
         return context
+
+    # def post(self, request, *args, **kwargs):
+    #     form = self.form_class(data=request.POST)
+    #     if form.is_valid():
+    #         user = form.save()
+    #         if self.send_verify_mail(user):
+    #             user_message = f"На адрес {user.email} отправлено письмо с кодом подтверждения. Пройдите по ссылке " \
+    #                            f"указанной в письме, для завершения регистрации "
+    #             messages.success(request, user_message)
+    #         return HttpResponseRedirect(reverse('admins:admins_user_create'))
+    #     return HttpResponseRedirect(reverse('admins:admins_user_create'))
 
 
 class UserUpdateView(UpdateView, CustomDispatchMixin):
