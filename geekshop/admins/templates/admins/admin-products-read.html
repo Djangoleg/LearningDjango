@@ -20,6 +20,8 @@
                                     <th>Цена</th>
                                     <th>Количество</th>
                                     <th>Категория</th>
+                                    <th>Активность</th>
+                                    <th>Действие</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
@@ -29,6 +31,8 @@
                                     <th>Цена</th>
                                     <th>Количество</th>
                                     <th>Категория</th>
+                                    <th>Активность</th>
+                                    <th>Действие</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
@@ -41,6 +45,20 @@
                                         <td>{{ product.price }}</td>
                                         <td>{{ product.quantity }}</td>
                                         <td>{{ product.category }}</td>
+                                        <td>{% if product.is_active %}
+                                                Да
+                                            {% else %}
+                                                Нет
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <form action="{% url 'admins:admins_product_delete' product.id %}"
+                                                  method="post">
+                                                {% csrf_token %}
+                                                <input class="btn btn-link" type="submit"
+                                                       value="Удалить">
+                                            </form>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>

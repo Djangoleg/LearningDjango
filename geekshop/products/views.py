@@ -34,11 +34,11 @@ def get_links_category():
         key = 'links_category'
         link_category = cache.get(key)
         if link_category is None:
-            link_category = ProductCategory.objects.all()
+            link_category = ProductCategory.objects.filter(is_active=True)
             cache.set(key, link_category)
         return link_category
     else:
-        return ProductCategory.objects.all()
+        return ProductCategory.objects.filter(is_active=True)
 
 
 def get_link_product():
@@ -46,11 +46,11 @@ def get_link_product():
         key = 'links_product'
         link_product = cache.get(key)
         if link_product is None:
-            link_product = Product.objects.all().order_by('price').select_related('category')
+            link_product = Product.objects.filter(is_active=True).order_by('price').select_related('category')
             cache.set(key, link_product)
         return link_product
     else:
-        return Product.objects.all().order_by('price').select_related('category')
+        return Product.objects.filter(is_active=True).order_by('price').select_related('category')
 
 
 def get_product(pk):
@@ -85,11 +85,11 @@ def get_links_menu():
         key = 'links_menu'
         links_menu = cache.get(key)
         if links_menu is None:
-            links_menu = ProductCategory.objects.all()
+            links_menu = ProductCategory.objects.filter(is_active=True)
             cache.set(key, links_menu)
         return links_menu
     else:
-        return ProductCategory.objects.all()
+        return ProductCategory.objects.filter(is_active=True)
 
 
 def get_category(pk):

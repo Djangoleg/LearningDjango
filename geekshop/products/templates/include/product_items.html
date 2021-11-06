@@ -5,7 +5,11 @@
                 <div class="card h-100">
                     <a href="#">
                         <img class="card-img-top"
-                             src="{{ product.image.url }}"
+                             {% if product.image %}
+                                 src="{{ product.image.url }}"
+                             {% else %}
+                                src=""
+                             {% endif %}
                              alt="">
                     </a>
                     <div class="card-body">
