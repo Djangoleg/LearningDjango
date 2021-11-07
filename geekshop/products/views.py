@@ -18,8 +18,6 @@ from .models import ProductCategory, Product
 
 def index(request):
 
-    request.session['category_id'] = None
-
     content = {
         'title': 'GeekShop',
         'header': 'GeekShop Store',
@@ -157,6 +155,7 @@ class ProductListView(ListView):
 
         if request.is_ajax():
             links_menu = get_links_menu()
+
             if category_id:
                 if category_id == '0':
                     category = {

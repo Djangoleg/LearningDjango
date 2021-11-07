@@ -57,6 +57,8 @@ class BasketCreateView(CreateView, UserDispatchMixin):
             'currency': "руб",
         }
 
+        self.request.session['category_id'] = None
+
         result = render_to_string('include/product_items.html', context, request=request)
 
         return JsonResponse({'result': result})
