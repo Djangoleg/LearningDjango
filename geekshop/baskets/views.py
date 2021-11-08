@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import redirect
 
@@ -32,7 +33,8 @@ class BasketCreateView(CreateView, UserDispatchMixin):
                     Basket.objects.create(user=request.user, product=product, quantity=1)
                 else:
                     basket = baskets.first()
-                    basket.quantity += 1
+                    # basket.quantity += 1
+                    basket.quantity = F('quantity') + 1
                     basket.save()
 
         category_id = self.request.session['category_id']
@@ -57,7 +59,7 @@ class BasketCreateView(CreateView, UserDispatchMixin):
             'currency': "руб",
         }
 
-        self.request.session['category_id'] = None
+        # self.request.session['category_id'] = None
 
         result = render_to_string('include/product_items.html', context, request=request)
 

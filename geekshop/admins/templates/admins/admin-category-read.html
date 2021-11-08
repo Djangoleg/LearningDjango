@@ -18,6 +18,7 @@
                                     <th>Название</th>
                                     <th>Описание</th>
                                     <th>Активность</th>
+                                    <th>Скидка</th>
                                     <th>Действие</th>
                                 </tr>
                                 </thead>
@@ -26,6 +27,7 @@
                                     <th>Название</th>
                                     <th>Описание</th>
                                     <th>Активность</th>
+                                    <th>Скидка</th>
                                     <th>Действие</th>
                                 </tr>
                                 </tfoot>
@@ -42,6 +44,9 @@
                                             {% else %}
                                                 <i class="fas fa-times-circle"></i>
                                             {% endif %}
+                                        </td>
+                                        <td>
+                                            {{ category.discount }}
                                         </td>
                                         <td>
                                             <form action="{% url 'admins:admins_category_delete' category.id %}"

@@ -48,9 +48,12 @@ class ProductAdminEditForm(forms.ModelForm):
 
 
 class CategoryAdminEditForm(forms.ModelForm):
+    discount = forms.IntegerField(label='скидка', required=False, min_value=0, max_value=90, initial=0)
+
     class Meta:
         model = ProductCategory
-        fields = ('name', 'description', 'is_active')
+        fields = ('name', 'description', 'is_active', 'discount')
+        exclude = ()
 
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
