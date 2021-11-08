@@ -245,3 +245,24 @@ if os.name == 'posix':
     }
 
 LOW_CACHE = True
+
+LOGS_FILE_PATH = os.path.join(os.path.dirname(BASE_DIR), 'logs')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': LOGS_FILE_PATH + 'debug.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
