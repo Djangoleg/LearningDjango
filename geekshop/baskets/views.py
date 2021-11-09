@@ -86,7 +86,7 @@ class BasketUpdateView(UpdateView, UserDispatchMixin):
         if request.is_ajax():
             basket_id = kwargs[self.pk_url_kwarg]
             quantity = kwargs['quantity']
-            basket = Basket.objects.filter(id=basket_id)
+            basket = Basket.objects.filter(id=basket_id).order_by('created_on')
             if basket.exists():
                 basket = basket.first()
                 if quantity > 0:
