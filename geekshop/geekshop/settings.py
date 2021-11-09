@@ -233,6 +233,12 @@ if DEBUG:
 
 # Включение для ubuntu. windows => nt
 if os.name == 'posix':
+    # Временно для теста. Потом убрать.
+    import socket
+    ip = socket.gethostbyname(socket.gethostname())
+    DOMAIN_NAME = DOMAIN_NAME.replace('localhost', ip)
+
+
     CACHE_MIDDLEWARE_ALIAS = 'default'
     CACHE_MIDDLEWARE_SECONDS = 120
     CACHE_MIDDLEWARE_KEY_PREFIX = 'geekshop'
