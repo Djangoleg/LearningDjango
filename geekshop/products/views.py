@@ -95,11 +95,11 @@ def get_category(pk):
         key = f'category_{pk}'
         category = cache.get(key)
         if category is None:
-            category = get_object_or_404(ProductCategory, pk=pk)
+            category = ProductCategory.objects.filter(pk=pk, is_active=True)
             cache.set(key, category)
         return category
     else:
-        return get_object_or_404(ProductCategory, pk=pk)
+        return ProductCategory.objects.filter(pk=pk, is_active=True)
 
 
 class ProductListView(ListView):
@@ -108,20 +108,37 @@ class ProductListView(ListView):
     context_object_name = 'products'
     success_url = reverse_lazy('products:index')
 
+    @staticmethod
+    def get_all(request):
+
+        request.session['category_id'] = None
+
+        content = {"title": "GeekShop",
+                   "currency": "руб",
+                   "categories": get_links_category(),
+                   "products": get_link_product()}
+
+        return render(request, 'products/products.html', content)
+
     def get_context_data(self, *args, **kwargs):
         context = super(ProductListView, self).get_context_data(**kwargs)
         context['title'] = 'Каталог'
         context['currency'] = "руб"
-        context['categories'] = get_links_category()
 
         category_id = None
         page_id = 1
 
         if 'category_id' in self.kwargs:
             category_id = self.kwargs['category_id']
+        elif self.request.session['category_id']:
+            category_id = self.request.session['category_id']
 
-        # Передача в сессию ИД выбранный категории. Далее используется при формировании корзины в baskets\views.py
-        self.request.session['category_id'] = category_id
+        if category_id:
+            # Передача в сессию ИД выбранный категории. Далее используется при формировании корзины в baskets\views.py
+            self.request.session['category_id'] = category_id
+            context['categories'] = get_category(category_id)
+        else:
+            context['categories'] = get_links_category()
 
         if 'page_id' in self.kwargs:
             page_id = self.kwargs['page_id']
@@ -169,7 +186,7 @@ class ProductListView(ListView):
                     category = get_category(category_id)
                     products = get_products_in_category_orederd_by_price(category_id)
 
-                paginator = Paginator(products, 2)
+                paginator = Paginator(products, 3)
                 try:
                     products_paginator = paginator.page(page_id)
                 except PageNotAnInteger:

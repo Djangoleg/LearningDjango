@@ -55,8 +55,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
 
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    'geekshop.mid.DisableCSRFMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'geekshop.mid.DisableCSRFMiddleware',
 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -246,22 +246,22 @@ if os.name == 'posix':
 
 LOW_CACHE = True
 
-LOGS_FILE_PATH = os.path.join(os.path.dirname(BASE_DIR), 'logs')
+LOGS_FILE_PATH = os.path.join(BASE_DIR, 'logs')
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
         'file': {
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': LOGS_FILE_PATH + 'debug.log',
+            'filename': LOGS_FILE_PATH + '\error.log',
         },
     },
     'loggers': {
         'django': {
             'handlers': ['file'],
-            'level': 'DEBUG',
+            'level': 'ERROR',
             'propagate': True,
         },
     },
