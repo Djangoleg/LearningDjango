@@ -255,7 +255,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': LOGS_FILE_PATH + '\error.log',
+            'filename': LOGS_FILE_PATH + '/error.log',
         },
     },
     'loggers': {
