@@ -44,8 +44,13 @@ window.addEventListener("load", () => {
             data: {'page_id': page_id},
             success: (data) => {
                 if (data) {
-                    $('.product_items').html(data.result);
-                    showAlert(t_href.name);
+                    if (data.result) {
+                        $('.product_items').html(data.result);
+                        showAlert(t_href.name);
+                    } else {
+                        // TODO: вот это сомнительно. Но работает
+                        document.body.innerHTML = data;
+                    }
                 }
             },
         });
