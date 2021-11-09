@@ -112,11 +112,13 @@ class ProductListView(ListView):
     def get_all(request):
 
         request.session['category_id'] = None
+        paginator = Paginator(get_link_product(), per_page=3)
+        products_paginator = paginator.page(1)
 
         content = {"title": "GeekShop",
                    "currency": "руб",
                    "categories": get_links_category(),
-                   "products": get_link_product()}
+                   "products": products_paginator}
 
         return render(request, 'products/products.html', content)
 
