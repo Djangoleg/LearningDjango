@@ -28,4 +28,6 @@ urlpatterns = [
 
     path('category/<int:category_id>/ajax/', ProductListView().get_products_ajax, name='category_ajax'),
     path('page/<int:page_id>/ajax/', ProductListView().get_products_ajax, name='page_ajax'),
+    path('comeback', ProductListView.as_view(), name='comeback'),
+    # path('comeback/<int:category_id>/ajax/', ProductListView().get_products_ajax, name='comeback'),
 ]

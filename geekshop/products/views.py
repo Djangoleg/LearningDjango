@@ -17,7 +17,6 @@ from .models import ProductCategory, Product
 # Create your views here.
 
 def index(request):
-
     content = {
         'title': 'GeekShop',
         'header': 'GeekShop Store',
@@ -112,6 +111,7 @@ class ProductListView(ListView):
     def get_all(request):
 
         request.session['category_id'] = None
+        request.session['page_id'] = None
         paginator = Paginator(get_link_product(), per_page=3)
         products_paginator = paginator.page(1)
 
@@ -144,6 +144,9 @@ class ProductListView(ListView):
 
         if 'page_id' in self.kwargs:
             page_id = self.kwargs['page_id']
+            self.request.session['page_id'] = page_id
+        elif self.request.session['page_id']:
+            page_id = self.request.session['page_id']
 
         # products = Product.objects.filter( category_id=category_id).order_by('id') if category_id is not None else
         # Product.objects.all().order_by('id')
@@ -166,39 +169,42 @@ class ProductListView(ListView):
 
     def get_products_ajax(self, request, *args, **kwargs):
         category_id = int()
+
         if 'category_id' in kwargs:
-            category_id = kwargs['category_id']
+            category_id = kwargs.get('category_id')
+        elif request.session['category_id']:
+            category_id = request.session.get('category_id')
+
         page_id = 1
         if 'page_id' in kwargs:
             page_id = kwargs['page_id']
+            request.session['page_id'] = page_id
+        elif request.session['page_id']:
+            page_id = request.session['page_id']
 
-        if request.is_ajax():
-            links_menu = get_links_menu()
+        # if request.is_ajax():
+        links_menu = get_links_menu()
 
-            if category_id:
-                if category_id == '0':
-                    category = {
-                        'pk': 0,
-                        'name': 'Все категории'
-                    }
-                    products = get_link_product()
-                else:
-                    # Передача в сессию ИД выбранный категории. Далее используется при формировании корзины в baskets\views.py
-                    request.session['category_id'] = category_id
-                    category = get_category(category_id)
-                    products = get_products_in_category_orederd_by_price(category_id)
+        if category_id == 0:
+            category = get_links_menu()
+            products = get_link_product()
+        else:
+            # Передача в сессию ИД выбранный категории. Далее используется при формировании корзины в baskets\views.py
+            request.session['category_id'] = category_id
+            category = get_category(category_id)
+            products = get_products_in_category_orederd_by_price(category_id)
 
-                paginator = Paginator(products, 3)
-                try:
-                    products_paginator = paginator.page(page_id)
-                except PageNotAnInteger:
-                    products_paginator = paginator.page(1)
-                except EmptyPage:
-                    products_paginator = paginator.page(paginator.num_pages)
+        paginator = Paginator(products, 3)
+        try:
+            products_paginator = paginator.page(page_id)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
 
         content = {
             'links_menu': links_menu,
-            'category': category,
+            'categories': category,
             'products': products_paginator,
             'currency': "руб",
         }
