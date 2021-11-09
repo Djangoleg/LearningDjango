@@ -236,7 +236,7 @@ if os.name == 'posix':
     # Временно для теста. Потом убрать.
     import socket
     ip = socket.gethostbyname(socket.gethostname())
-    DOMAIN_NAME = DOMAIN_NAME.replace('localhost', ip)
+    DOMAIN_NAME = DOMAIN_NAME.replace('localhost:8000', ip)
 
 
     CACHE_MIDDLEWARE_ALIAS = 'default'
