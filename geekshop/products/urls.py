@@ -21,11 +21,13 @@ from .views import ProductListView, ProductDetail
 app_name = 'products'
 
 urlpatterns = [
-    path('', cache_page(3600)(ProductListView.as_view()), name='index'),
+    path('', ProductListView.get_all, name='index'),
     path('category/<int:category_id>/', ProductListView.as_view(), name='category'),
     path('page/<int:page_id>/', ProductListView.as_view(), name='page'),
     path('detail/<int:pk>/', cache_page(3600)(ProductDetail.as_view()), name='detail'),
 
-    path('category/<int:category_id>/ajax/', cache_page(3600)(ProductListView().get_products_ajax), name='category_ajax'),
-    path('page/<int:page_id>/ajax/', cache_page(3600)(ProductListView().get_products_ajax), name='page_ajax'),
+    path('category/<int:category_id>/ajax/', ProductListView().get_products_ajax, name='category_ajax'),
+    path('page/<int:page_id>/ajax/', ProductListView().get_products_ajax, name='page_ajax'),
+    path('comeback', ProductListView.as_view(), name='comeback'),
+    # path('comeback/<int:category_id>/ajax/', ProductListView().get_products_ajax, name='comeback'),
 ]

@@ -1,0 +1,464 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+      "action_time": "2021-10-18T23:53:46.486Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "id680979835",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+      "action_time": "2021-10-20T11:08:44.860Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "5",
+      "object_repr": "test11",
+      "action_flag": 3,
+      "change_message": ""
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "msbkl8iyt0kvz0zakviaiqpc66ayvcet",
+    "fields": {
+      "session_data": ".eJxVjEEOgjAQRe_StWmmBdrBpXvOQDrtDKCGJhQWxnh3xbBh-977_61iWHnIy6ufkro2F9WHbR37rfDyJ8qoE6MQHzzvIt3DPGQd87wuE-k90YctusuJn7ejPR2MoYy_dd0SexZsgTyINRBRvDifxNtQI5hoqfXJxQqNQ6TGkoNKkiBX6ADU5wuz1jzz:1mk5K9:7M1hMaI72p7gpEPFBI9DLtZdCe_mGO1I63kwEm_1OsQ",
+      "expire_date": "2021-11-22T14:08:37.330Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "oczl2fcuztjujwfxbhl0v0qetx4ujrnx",
+    "fields": {
+      "session_data": ".eJxVjjsOwjAQRO_iGllrJ9gbSnrOEHnt3SQQ2VI-BULcnQSlgHbezNO8VBvWpW_Xmad2SOqijDr9ZhTig_MO0j3kruhY8jINpPeKPuisbyXxeD26f4I-zP22rhtiz4INkAexBiKKF-eTeBtqBBMtNT65WKFxiHS25KCSJMgVOoBNGsPCXZme3595Hcf3B0JqPnk:1mb1sB:XtRemuIA0gM22UJGWoBOBwKcgfX1MZOPRZJozg3r6hU",
+      "expire_date": "2021-10-28T14:38:19.665Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "vwudqqalylp8z73tdwa3vara0xupw5zv",
+    "fields": {
+      "session_data": ".eJxVjk0OwiAYRO_C2hCwlIJL956h4fuhrTaQFLowxrvbmi50O2_mZV6iD2sd-7Xw0k8kLsKJ028GAR-cdkD3kIYsMae6TCD3ijxokbdMPF-P7p9gDGXc1h17tmSDx3NHYFSMTjcInaYGVURU1LD2oKI1YMB5IMbWRuLWMZtoNimGykNent-faZ3n9weWr0BW:1mjTsy:AKZqoUR8sjvCCr943tS82Z42Qzh-3njhy_GWQN4fUbc",
+      "expire_date": "2021-11-20T22:10:04.388Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "zrbl9v6pcd2hh50542jva7k3nmwqbhx4",
+    "fields": {
+      "session_data": ".eJxVjjsOwjAQRO_iGllrJ9hrSvqcIfLau0kAxVI-BULcnQSlgHbezNO8VBvXpW_Xmad2yOqijDr9ZhTTnccd5Fscu6JTGZdpIL1X9EFn3ZTMj-vR_RP0ce63dR2IPQsGIA9iDSQUL85n8TbWCCZZCj67VKFxiHS25KCSLMgVOoBNmuLCXZme35_h_QGH9Dz3:1mjSc4:9UAn0p6tr7-E-ksPGYtY93rmqeAlZg42wboyHLdMk9w",
+      "expire_date": "2021-11-20T20:48:32.283Z"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 1,
+    "fields": {
+      "name": "Одежда",
+      "description": "Описание для класса одежды",
+      "is_active": true,
+      "discount": 0
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 2,
+    "fields": {
+      "name": "Новинки",
+      "description": "",
+      "is_active": true,
+      "discount": 0
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 3,
+    "fields": {
+      "name": "Аксессуары",
+      "description": "1",
+      "is_active": true,
+      "discount": 0
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 4,
+    "fields": {
+      "name": "Подарки",
+      "description": "",
+      "is_active": true,
+      "discount": 0
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 5,
+    "fields": {
+      "name": "Обувь",
+      "description": "",
+      "is_active": true,
+      "discount": 0
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Супер новинки",
+      "description": "Тут только супер новинки без скидок",
+      "is_active": true,
+      "discount": 0
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 9,
+    "fields": {
+      "name": "Тестовая категория",
+      "description": "Тестовая категория",
+      "is_active": true,
+      "discount": 50
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "name": "Худи черного цвета с монограммами adidas Originals",
+      "image": "product_images/Adidas-hoodie.png",
+      "description": "Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.",
+      "price": "6090.00",
+      "quantity": 101,
+      "category": 1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "name": "Синяя куртка The North Face",
+      "image": "product_images/Blue-jacket-The-North-Face.png",
+      "description": "Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый пуховый наполнитель.",
+      "price": "23725.00",
+      "quantity": 100,
+      "category": 2,
+      "is_active": true
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "name": "Коричневый спортивный oversized-топ ASOS DESIGN",
+      "image": "product_images/Brown-sports-oversized-top-ASOS-DESIGN.png",
+      "description": "Материал с плюшевой текстурой. Удобный и мягкий.",
+      "price": "3390.00",
+      "quantity": 100,
+      "category": 1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "name": "Черный рюкзак Nike Heritage",
+      "image": "product_images/Black-Nike-Heritage-backpack.png",
+      "description": "Плотная ткань. Легкий материал.",
+      "price": "2340.00",
+      "quantity": 100,
+      "category": 6,
+      "is_active": true
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "name": "Черные туфли на платформе с 3 парами люверсов Dr Martens 1461 Bex",
+      "image": "product_images/Black-Dr-Martens-shoes.png",
+      "description": "Гладкий кожаный верх. Натуральный материал.",
+      "price": "13590.00",
+      "quantity": 1,
+      "category": 5,
+      "is_active": true
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "name": "Темно-синие широкие строгие брюки ASOS DESIGN",
+      "image": "product_images/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png",
+      "description": "Легкая эластичная ткань сирсакер Фактурная ткань.",
+      "price": "2890.00",
+      "quantity": 100,
+      "category": 4,
+      "is_active": true
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 19,
+    "fields": {
+      "name": "Тестовый продукт",
+      "image": "product_images/1521815176194179980_vglFYrg.jpg",
+      "description": "Велосипед программиста",
+      "price": "2500.00",
+      "quantity": 2,
+      "category": 9,
+      "is_active": true
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$4nqULsXn5bX9yPWCx0b2lv$SkAcQgYRJ0Kk3Su4p4PfYkNOZGPbFQzZnaDL1iyKymc=",
+      "last_login": "2021-11-06T20:53:08.941Z",
+      "is_superuser": true,
+      "username": "ok",
+      "first_name": "Oleg",
+      "last_name": "Kr",
+      "email": "kr@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2021-10-04T18:47:32.565Z",
+      "image": "users_image/Telegram_bot.png",
+      "age": 18,
+      "activation_key": null,
+      "activation_key_created": "2021-10-16T08:40:01.770Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$zplfL7KYU9zx21C28Ym3Wn$2YmLSBJT4bOBoaKazxhjqjiM3N1dOrzmiSkmIUfjKkA=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "test",
+      "first_name": "test",
+      "last_name": "test",
+      "email": "test@mail.ru",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2021-10-04T18:48:41.404Z",
+      "image": "",
+      "age": 18,
+      "activation_key": null,
+      "activation_key_created": "2021-10-16T08:40:01.770Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$SjyfrL1Rcv6CYjjVbcw9lO$hGIORn/ni/9bcVgihTFANu+54BncJMId9+CMFmXFwwE=",
+      "last_login": "2021-10-07T18:30:26.177Z",
+      "is_superuser": false,
+      "username": "iuyiyiy",
+      "first_name": "ewrwrw",
+      "last_name": "iuyiyuiy",
+      "email": "iyuiyi@mail.ru",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2021-10-07T18:29:58.490Z",
+      "image": "users_image/circus_JxFrm8E.jpg",
+      "age": 18,
+      "activation_key": null,
+      "activation_key_created": "2021-10-16T08:40:01.770Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "!NgIwEQylPiXX7TPiosLgHWFS8YqFT6jf2i2ZOMJ8",
+      "last_login": "2021-10-24T22:47:57.060Z",
+      "is_superuser": false,
+      "username": "id680979835",
+      "first_name": "John",
+      "last_name": "Rambo",
+      "email": "",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2021-10-16T14:16:03Z",
+      "image": "users_image/680979835_vk.jpg",
+      "age": 22,
+      "activation_key": null,
+      "activation_key_created": "2021-10-16T14:16:03.846Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$eZXGxL6ZiKfauLtYIRaquO$QVStTRp/lAt0MnzrKLRNPWu9mSEDNViFldKeXbM6oL4=",
+      "last_login": "2021-10-20T11:10:23.527Z",
+      "is_superuser": false,
+      "username": "test11",
+      "first_name": "test11",
+      "last_name": "test11",
+      "email": "krereere@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-10-20T11:09:34.897Z",
+      "image": "",
+      "age": 18,
+      "activation_key": "",
+      "activation_key_created": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$UDFUYrG2O2rQOOVFxNXyJ0$wA4S+IbX7jBcCWM7alYNAkV57qChyxOiqgvdqP3H+4U=",
+      "last_login": "2021-10-24T22:49:58.329Z",
+      "is_superuser": false,
+      "username": "test2323",
+      "first_name": "test2323",
+      "last_name": "test2323",
+      "email": "kr.olegqwqwqw@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-10-24T22:49:33.676Z",
+      "image": "",
+      "age": 18,
+      "activation_key": "",
+      "activation_key_created": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$xit8cdaL0FbDBPPOO7l3k3$EkTYCwnlXYINw9U8aJ5mcu/CiAhSWeMMnPZYXnJjJMs=",
+      "last_login": "2021-11-06T22:10:00.561Z",
+      "is_superuser": false,
+      "username": "Test1212",
+      "first_name": "Test1212",
+      "last_name": "Test1212",
+      "email": "Test1212@mail.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-11-06T22:06:17.361Z",
+      "image": "",
+      "age": 18,
+      "activation_key": "",
+      "activation_key_created": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$1DFGGoeRaMbkiDCEmH3KNb$Hg2EuEa/Qa4mvkQYcdecd/+qafG1tIwjDI1ZaejDk2k=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "234124141341324",
+      "first_name": "234124141341324",
+      "last_name": "234124141341324",
+      "email": "234124141341324@bk.ru",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2021-11-06T23:13:08.008Z",
+      "image": "",
+      "age": 18,
+      "activation_key": "c7fbebf8275a2df8dcb8846709bec3c350d4d03a",
+      "activation_key_created": "2021-11-06T23:13:08.165Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$wmg8nkdQrXAnDIUqDGOThw$CKBQRl5NqaaUHUma03E+mQbooDXMmht1y18WRh1Y+Ck=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "32432324",
+      "first_name": "32432324",
+      "last_name": "32432324",
+      "email": "kr.oleg@gmail.com",
+      "is_staff": false,
+      "is_active": false,
+      "date_joined": "2021-11-06T23:14:57.528Z",
+      "image": "",
+      "age": 18,
+      "activation_key": "e0f9542c76b358a782965b436e0c4ce9e7e34edd",
+      "activation_key_created": "2021-11-06T23:14:57.679Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "social_django.usersocialauth",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "provider": "vk-oauth2",
+      "uid": "680979835",
+      "extra_data": "{\"auth_time\": 1635115677, \"id\": 680979835, \"expires\": 86400, \"access_token\": \"ef49a75f4513e0eca06b3fec3be1ac314c8bbbc9836fe6e7c490e374a321b12e5fffcf7edccae3aaa80fc\", \"token_type\": null}",
+      "created": "2021-10-16T14:16:03.852Z",
+      "modified": "2021-10-24T22:47:57.036Z"
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 20,
+    "fields": {
+      "user": 1,
+      "created": "2021-11-08T00:33:44.628Z",
+      "updated": "2021-11-08T00:50:18.709Z",
+      "status": "FM",
+      "is_active": true
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 21,
+    "fields": {
+      "user": 1,
+      "created": "2021-11-08T00:51:24.745Z",
+      "updated": "2021-11-08T14:07:44.932Z",
+      "status": "FM",
+      "is_active": true
+    }
+  },
+  {
+    "model": "orders.order",
+    "pk": 22,
+    "fields": {
+      "user": 1,
+      "created": "2021-11-08T14:08:49.612Z",
+      "updated": "2021-11-08T14:08:49.791Z",
+      "status": "FM",
+      "is_active": true
+    }
+  }
+]

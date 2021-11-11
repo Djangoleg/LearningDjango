@@ -25,7 +25,7 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-4h4!^xm8b2djh=t-6z5)-cn^-$du0btt3=f*r4ms!+37h=)_1_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -55,8 +55,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
 
-    # 'django.middleware.csrf.CsrfViewMiddleware',
-    'geekshop.mid.DisableCSRFMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'geekshop.mid.DisableCSRFMiddleware',
 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -233,6 +233,12 @@ if DEBUG:
 
 # Включение для ubuntu. windows => nt
 if os.name == 'posix':
+    # Временно для теста. Потом убрать.
+    import socket
+    ip = socket.gethostbyname(socket.gethostname())
+    DOMAIN_NAME = DOMAIN_NAME.replace('localhost:8000', ip)
+
+
     CACHE_MIDDLEWARE_ALIAS = 'default'
     CACHE_MIDDLEWARE_SECONDS = 120
     CACHE_MIDDLEWARE_KEY_PREFIX = 'geekshop'
@@ -245,3 +251,24 @@ if os.name == 'posix':
     }
 
 LOW_CACHE = True
+
+LOGS_FILE_PATH = os.path.join(BASE_DIR, 'logs')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': LOGS_FILE_PATH + '/error.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}

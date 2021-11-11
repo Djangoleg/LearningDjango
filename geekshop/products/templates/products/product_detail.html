@@ -4,14 +4,15 @@
 {% block css %}
     <link href="{% static 'css/products.css' %}" rel="stylesheet">
 {% endblock %}
-
 {% block content %}
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
                 <h1 class="my-4">GeekShop</h1>
                 <div class="list-group">
-                    <a href="{% url 'products:index' %}" class="list-group-item">Все категории</a>
+                    <div class="comeback">
+                        <a href="{% url 'products:comeback' %}" class="list-group-item">Назад</a>
+                    </div>
                 </div>
             </div>
 

@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import redirect
 
@@ -10,6 +11,7 @@ from django.views.generic import DeleteView, CreateView, UpdateView
 from baskets.models import Basket
 from geekshop.mixin import UserDispatchMixin
 from products.models import Product, ProductCategory
+from products.views import get_products_in_category_orederd_by_price
 
 
 class BasketCreateView(CreateView, UserDispatchMixin):
@@ -31,19 +33,19 @@ class BasketCreateView(CreateView, UserDispatchMixin):
                     Basket.objects.create(user=request.user, product=product, quantity=1)
                 else:
                     basket = baskets.first()
-                    basket.quantity += 1
+                    # basket.quantity += 1
+                    basket.quantity = F('quantity') + 1
                     basket.save()
 
         category_id = self.request.session['category_id']
 
-        products = Product.objects.filter(
-            category_id=category_id) if category_id is not None else Product.objects.all().order_by('id')
+        products = get_products_in_category_orederd_by_price(category_id)
 
         page_id = 1
         if request.POST.get('page_id'):
             page_id = int(request.POST.get('page_id'))
 
-        paginator = Paginator(products.order_by('id'), per_page=3)
+        paginator = Paginator(products, per_page=3)
 
         try:
             products_paginator = paginator.page(page_id)
@@ -56,6 +58,8 @@ class BasketCreateView(CreateView, UserDispatchMixin):
             'products': products_paginator,
             'currency': "руб",
         }
+
+        # self.request.session['category_id'] = None
 
         result = render_to_string('include/product_items.html', context, request=request)
 
@@ -82,7 +86,7 @@ class BasketUpdateView(UpdateView, UserDispatchMixin):
         if request.is_ajax():
             basket_id = kwargs[self.pk_url_kwarg]
             quantity = kwargs['quantity']
-            basket = Basket.objects.filter(id=basket_id)
+            basket = Basket.objects.filter(id=basket_id).order_by('created_on')
             if basket.exists():
                 basket = basket.first()
                 if quantity > 0:

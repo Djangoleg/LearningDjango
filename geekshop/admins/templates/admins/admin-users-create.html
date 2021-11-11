@@ -7,6 +7,30 @@
                 <h1 class="mt-4">Создание пользователя</h1>
                 <form action="{% url 'admins:admins_user_create' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
+                    {% if form.errors or messages %}
+                        <div class="alert {% if messages %} alert-success {% else %} alert-warning {% endif %} alert-dismissible fade show"
+                             role="alert"
+                             style="margin-top: 50px;">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    {{ message }}
+                                {% endfor %}
+                            {% elif form.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            {% elif form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <p> {{ error }} </p>
+                                    {% endfor %}
+                                {% endfor %}
+                            {% endif %}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
                     <div class="form-row">
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -14,6 +38,8 @@
                                 {{ form.first_name }}
                             </div>
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label class="small mb-1" for="{{ form.last_name.id_for_label }}">Фамилия</label>
@@ -21,8 +47,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-row mb-2">
-                        <div class="col-lg-12">
+                    <div class="form-row">
+                        <div class="col-lg-6">
                             <div class="custom-file">
                                 {{ form.image }}
                                 <label class="custom-file-label" for="{{ form.image.id_for_label }}">Выберите
@@ -35,6 +61,8 @@
                             <label class="small mb-1" for="{{ form.username.id_for_label }}">Имя пользователя</label>
                             {{ form.username }}
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-lg-6">
                             <label class="small mb-1" for="{{ form.email.id_for_label }}">Адрес электронной
                                 почты</label>
@@ -46,13 +74,15 @@
                             <label class="small mb-1" for="{{ form.password1.id_for_label }}">Пароль</label>
                             {{ form.password1 }}
                         </div>
+                    </div>
+                    <div class="form-row">
                         <div class="col-lg-6">
                             <label class="small mb-1" for="{{ form.password2.id_for_label }}">Повторите пароль</label>
                             {{ form.password2 }}
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col-lg-12" style="margin-top: 33px;">
+                        <div class="col-lg-6" style="margin-top: 33px;">
                             <input class="btn btn-info btn-block" type="submit" value="Сохранить">
                         </div>
                     </div>

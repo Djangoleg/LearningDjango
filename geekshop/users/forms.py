@@ -59,7 +59,7 @@ class UserProfileForm(UserChangeForm):
         image = forms.ImageField(widget=forms.FileInput(), required=False)
         # email = forms.CharField(validators=[check_email])
         model = User
-        fields = ('username', 'email', 'age', 'first_name', 'last_name', 'image')
+        fields = ('username', 'email', 'age', 'first_name', 'last_name', 'image', 'is_active')
 
     def __init__(self, *args, **kwargs):
         super(UserProfileForm, self).__init__(*args, **kwargs)
@@ -67,7 +67,10 @@ class UserProfileForm(UserChangeForm):
         self.fields['email'].widget.attrs['readonly'] = True
 
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
+            if field_name != 'is_active':
+                field.widget.attrs['class'] = 'form-control py-4'
+            else:
+                field.widget.attrs['style'] = 'margin-top: 20px;'
 
         self.fields['image'].widget.attrs['class'] = 'custom-file-input'
 

@@ -34,23 +34,29 @@ class ProductAdminEditForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ('name', 'image', 'description', 'price', 'quantity', 'category')
+        fields = ('name', 'image', 'description', 'price', 'quantity', 'category', 'is_active')
 
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             if field_name == 'image' or field_name == 'category':
                 field.widget.attrs['class'] = 'form-control'
+            elif field_name == 'is_active':
+                field.widget.attrs['style'] = 'margin-top: 20px;'
             else:
                 field.widget.attrs['class'] = 'form-control py-4'
 
 
 class CategoryAdminEditForm(forms.ModelForm):
+    discount = forms.IntegerField(label='скидка', required=False, min_value=0, max_value=90, initial=0)
+
     class Meta:
         model = ProductCategory
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'is_active', 'discount')
+        exclude = ()
 
     def __init__(self, *args, **kwargs):
         super(forms.ModelForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control py-4'
+            if field_name != 'is_active':
+                field.widget.attrs['class'] = 'form-control py-4'

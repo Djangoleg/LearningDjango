@@ -32,15 +32,15 @@ class OrderCreate(CreateView):
         context = super(OrderCreate, self).get_context_data(**kwargs)
         context['title'] = 'GeekShop | Создать заказ'
 
-        order_form_set = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=1)
+        OrderItemFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=1)
 
         if self.request.POST:
-            formset = order_form_set(self.request.POST)
+            formset = OrderItemFormSet(self.request.POST)
         else:
             basket_item = Basket.objects.filter(user=self.request.user)
             if basket_item:
-                order_form_set = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=basket_item.count())
-                formset = order_form_set()
+                OrderItemFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=basket_item.count())
+                formset = OrderItemFormSet()
 
                 for ind, form in enumerate(formset.forms):
                     form.initial['product'] = basket_item[ind].product
@@ -48,7 +48,7 @@ class OrderCreate(CreateView):
                     form.initial['price'] = basket_item[ind].product.price
                 basket_item.delete()
             else:
-                formset = order_form_set()
+                formset = OrderItemFormSet()
 
         context['orderitems'] = formset
 
@@ -80,34 +80,33 @@ class OrderUpdate(UpdateView):
         context = super(OrderUpdate, self).get_context_data(**kwargs)
         context['title'] = 'GeekShop | Обновление заказа'
 
-        order_form_set = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=1)
+        OrderItemFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=1)
 
         if self.request.POST:
-            formset = order_form_set(self.request.POST, instance=self.object)
+            # order_items_count = OrderItem.objects.filter(order_id=self.object.pk).count()
+            # OrderItemFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemsForm, extra=order_items_count)
+            formset = OrderItemFormSet(self.request.POST, instance=self.object)
         else:
-            formset = order_form_set(instance=self.object)
+            formset = OrderItemFormSet(instance=self.object)
             for form in formset:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
-
         context['orderitems'] = formset
-
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
-        order_items = context['orderitems']
+        orderitems = context['orderitems']
 
         with transaction.atomic():
             form.instance.user = self.request.user
             self.object = form.save()
-            if order_items.is_valid():
-                order_items.instance = self.object
-                order_items.save()
+            if orderitems.is_valid():
+                orderitems.instance = self.object
+                orderitems.save()
 
             if self.object.get_total_cost() == 0:
                 self.object.delete()
-
         return super(OrderUpdate, self).form_valid(form)
 
 
